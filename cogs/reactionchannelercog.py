@@ -48,7 +48,7 @@ class ReactionChannelerCog(commands.Cog, name="リアク字チャンネラー(Di
                                     required=True)
     ])
     async def add(self, ctx:SlashContext, reaction:str=None, channel:str=None):
-        self.add_guild(self, ctx, reaction, channel)
+        await self._add(ctx, reaction, channel)
 
     @cog_ext.cog_slash(
     name="reacji-channeler-add_guild",
@@ -65,6 +65,9 @@ class ReactionChannelerCog(commands.Cog, name="リアク字チャンネラー(Di
                                     required=True)
     ])
     async def add_guild(self, ctx:SlashContext, reaction:str=None, channel:str=None):
+        await self._add(ctx, reaction, channel)
+
+    async def _add(self, ctx:SlashContext, reaction:str=None, channel:str=None):
         """
         リアク字チャンネラー(Discord)（＊）で反応する絵文字を追加します。
         ＊指定した絵文字でリアクションされた時、チャンネルに通知する機能のこと
@@ -77,15 +80,18 @@ class ReactionChannelerCog(commands.Cog, name="リアク字チャンネラー(Di
     name="reacji-channeler-list",
     description='現在登録されているReacji Channelerを確認する',
     )
-    async def list(self, ctx):
-        self.list_guild(self, ctx)
+    async def list(self, ctx:SlashContext):
+        await self._list(ctx)
 
     @cog_ext.cog_slash(
     name="reacji-channeler-list_guild",
     guild_ids=guilds,
     description='現在登録されているReacji Channelerを確認する',
     )
-    async def list_guild(self, ctx):
+    async def list_guild(self, ctx:SlashContext):
+        await self._list(ctx)
+
+    async def _list(self, ctx:SlashContext):
         """
         リアク字チャンネラー(Discord)（＊）で反応する絵文字とチャンネルのリストを表示します。
         ＊指定した絵文字でリアクションされた時、チャンネルに通知する機能のこと
@@ -96,7 +102,6 @@ class ReactionChannelerCog(commands.Cog, name="リアク字チャンネラー(Di
     # リアク字チャンネラー(Discord)削除（１種類）
     @cog_ext.cog_slash(
     name="reacji-channeler-delete",
-    guild_ids=guilds,
     description='Reacji Channelerを削除する',
     options=[
         manage_commands.create_option(name='reaction',
@@ -108,8 +113,8 @@ class ReactionChannelerCog(commands.Cog, name="リアク字チャンネラー(Di
                                     option_type=3,
                                     required=True)
     ])
-    async def delete(self, ctx, reaction:str=None, channel:str=None):
-        self.delete_guild(self, ctx, reaction, channel)
+    async def delete(self, ctx:SlashContext, reaction:str=None, channel:str=None):
+        await self._delete(ctx, reaction, channel)
 
     @cog_ext.cog_slash(
     name="reacji-channeler-delete_guild",
@@ -125,15 +130,17 @@ class ReactionChannelerCog(commands.Cog, name="リアク字チャンネラー(Di
                                     option_type=3,
                                     required=True)
     ])
-    async def delete_guild(self, ctx, reaction:str=None, channel:str=None):
+    async def delete_guild(self, ctx:SlashContext, reaction:str=None, channel:str=None):
         """
         リアク字チャンネラー(Discord)（＊）で反応する絵文字、チャンネルの組み合わせを削除します
         絵文字、チャンネルの記載が必須です。存在しない組み合わせを消す場合でもエラーにはなりません
         ＊指定した絵文字でリアクションされた時、チャンネルに通知する機能のこと
         """
+        await self._delete(ctx, reaction, channel)
+
+    async def _delete(self, ctx:SlashContext, reaction:str=None, channel:str=None):
         msg = await self.reaction_channel.delete(ctx, reaction, channel)
         await ctx.send(msg)
-
 
     # リアク字チャンネラー(Discord)コマンド群
     @commands.group(aliases=['reacji','rj','rjch'], description='リアク字チャンネラー(Discord)を操作するコマンド（サブコマンド必須）')
