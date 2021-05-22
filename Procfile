@@ -1,0 +1,1 @@
+discordbot: python reacji-channeler-bot.py
