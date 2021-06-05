@@ -19,7 +19,7 @@ class ReacjiChannelerBot(commands.Bot):
     # MyBotのコンストラクタ。
     def __init__(self, command_prefix, intents):
         # スーパークラスのコンストラクタに値を渡して実行。
-        super().__init__(command_prefix, case_insensitive=True, intents=intents)
+        super().__init__(command_prefix, case_insensitive=True, intents=intents, help_command=None)
         slash = SlashCommand(self, sync_commands=True)
 
         # INITIAL_EXTENSIONSに格納されている名前から、コグを読み込む。
