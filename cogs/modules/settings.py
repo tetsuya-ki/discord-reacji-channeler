@@ -1,4 +1,4 @@
-import os
+import os, discord
 from os.path import join, dirname
 from dotenv import load_dotenv
 from logging import DEBUG, INFO, WARNING, ERROR
@@ -28,6 +28,16 @@ def num_env(param):
     else:
         return int(param)
 
+def split_guild_env(str):
+    guilds = []
+    if str is None or str == '':
+        pass
+    elif not ';' in str:
+        guilds.append(discord.Object(str))
+    else:
+        guilds = list(map(discord.Object, str.split(';')))
+    return guilds
+
 load_dotenv(verbose=True)
 dotenv_path = join(dirname(__file__), 'files' + os.sep + '.env')
 load_dotenv(dotenv_path)
@@ -37,4 +47,5 @@ LOG_LEVEL = get_log_level(os.environ.get('LOG_LEVEL'))
 IS_HEROKU = if_env(os.environ.get('IS_HEROKU'))
 FIRST_REACTION_CHECK = if_env(os.environ.get('FIRST_REACTION_CHECK'))
 REACJI_CHANNELER_PERMIT_WEBHOOK_ID = os.environ.get('REACJI_CHANNELER_PERMIT_WEBHOOK_ID')
-ENABLE_SLASH_COMMAND_GUILD_ID_LIST = os.environ.get('ENABLE_SLASH_COMMAND_GUILD_ID_LIST')
+APPLICATION_ID = os.environ.get('APPLICATION_ID')
+ENABLE_SLASH_COMMAND_GUILD_ID = split_guild_env(os.environ.get('ENABLE_SLASH_COMMAND_GUILD_ID'))
