@@ -93,8 +93,6 @@ class ReactionChannel:
                 permissions.append(discord.PermissionOverwrite(read_messages=False,read_message_history=False))
                 target.append(guild.default_role)
                 permissions.append(discord.PermissionOverwrite(read_messages=True,read_message_history=True))
-                target.append(guild.owner)
-                permissions.append(discord.PermissionOverwrite(read_messages=True,read_message_history=True))
                 target.append(self.bot.user)
                 overwrites = dict(zip(target, permissions))
 
