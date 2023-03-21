@@ -9,7 +9,6 @@ license = "MIT License"
 python = "^3.9"
 "discord.py" = "2.0.0"
 python-dotenv = "^0.20.0"
-mojimoji = "^0.0.12"
 
 [tool.poetry.dev-dependencies]
 

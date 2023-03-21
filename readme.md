@@ -23,18 +23,22 @@ SlackのReacji Channeler(リアク字チャンネラー)っぽい機能が使え
 
 ### リアク字チャンネラー(Discord)カテゴリ(reactionchannelercog.pyで実装)
 
-`/reactionChanneler` リアク字チャンネラー(Discord)を操作するコマンド（サブコマンド必須）。Slackのリアク字チャンネラーからインスパイアされ、作成したもの。
+`/reacji-channeler` リアク字チャンネラー(Discord)を操作するコマンド（サブコマンド必須）。Slackのリアク字チャンネラーからインスパイアされ、作成したもの。
 
 - リアク字チャンネラー(Discord)追加・・・このリポジトリではスラッシュコマンドが有効なので少し雰囲気が違います  
+  - `reacji-channeler add`  
 ![image(reactionChanneler_add)](https://github.com/tetsuya-ki/images/blob/main/discord-bot-heroku/reactionChanneler_add.png?raw=true)
 
 - リアク字チャンネラー(Discord)削除・・・このリポジトリではスラッシュコマンドが有効なので少し雰囲気が違います  
+  - `reacji-reacji-channeler remove`  
 ![image(reactionChanneler_delete)](https://github.com/tetsuya-ki/images/blob/main/discord-bot-heroku/reactionChanneler_delete.png?raw=true)
 
 - リアク字チャンネラー(Discord)表示・・・このリポジトリではスラッシュコマンドが有効なので少し雰囲気が違います  
+  - `reacji-channeler list`  
 ![image(reactionChanneler_list)](https://github.com/tetsuya-ki/images/blob/main/discord-bot-heroku/reactionChanneler_list.png?raw=true)
 
 - リアク字チャンネラー(Discord)全削除  
+  - `reacji-channeler purge`
 ![image(reactionChanneler_purge)](https://github.com/tetsuya-ki/images/blob/main/discord-bot-heroku/reactionChanneler_purge.png?raw=true)
 
 - リアク字チャンネラー(Discord)の対象のリアクションを追加すると、  
