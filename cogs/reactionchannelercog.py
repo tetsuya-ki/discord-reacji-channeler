@@ -150,8 +150,7 @@ class ReactionChannelerCog(commands.Cog, name="リアク字チャンネラー"):
         loop = asyncio.get_event_loop()
         if payload.member.bot:# BOTアカウントは無視する
             return
-        if payload.emoji.name == '👌':# ok_handは確認に使っているので無視する(と思っていたが別機能として使用)
-            await self.save_file(payload)
+        if payload.emoji.name == '👌':# ok_handは確認に使っているので無視する
             return
         await self.pin_message(payload)
         await self.reaction_to_send_channel(payload)
