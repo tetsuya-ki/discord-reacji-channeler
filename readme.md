@@ -11,6 +11,7 @@ SlackのReacji Channeler(リアク字チャンネラー)っぽい機能が使え
   - [機能](#機能)
     - [リアク字チャンネラー(Discord)カテゴリ(reactionchannelercog.pyで実装)](#リアク字チャンネラーdiscordカテゴリreactionchannelercogpyで実装)
   - [環境変数の説明](#環境変数の説明)
+  - [fly.ioでの動かし方](#flyioでの動かし方)
   - [ローカルでの動かし方](#ローカルでの動かし方)
   - [ローカルでの動かし方(Poetry)](#ローカルでの動かし方poetry)
     - [古い方法](#古い方法)
@@ -69,10 +70,37 @@ SlackのReacji Channeler(リアク字チャンネラー)っぽい機能が使え
   - この環境変数にWebhook IDがない、または、allが記載されていない場合、登録は可能だが、実際に実行はされない
     - 勝手にリアク字チャンネラー(Discord)を登録され情報が流出することを防ぐため、環境変数で指定がない限り実行されないようにする(少し面倒かもしれない)
 - ENABLE_SLASH_COMMAND_GUILD_ID
+  - 普通に動かすときは起動しないでください
+  - これを指定すると、すぐにコマンドが反映されます(つまり、開発中に使うもの)
   - スラッシュコマンドを有効にするギルドID(複数ある場合は「;」を間に挟むこと/それぞれのギルドにスラッシュコマンドを許可されたこのBotが必要(どこかのギルドに登録されていない場合、または、登録されていてもスラッシュコマンドが許可されていない場合、エラーとなります))
   - 例
     - 1件の場合: ENABLE_SLASH_COMMAND_GUILD_ID=18471289371923
     - 2件の場合: ENABLE_SLASH_COMMAND_GUILD_ID=18471289371923;1389103890128390
+
+## fly.ioでの動かし方
+
+- [fly.ioのweb cli](https://fly.io/terminal)
+
+```sh
+# fly.ioのweb cliでもOK。もしくはflyコマンド可能なところ
+# git clone
+git clone https://github.com/tetsuya-ki/discord-reacji-channeler.git
+cd discord-reacji-channeler
+
+# fly.io起動準備(DBなどは不要)
+flyctl launch
+
+# fly.ioの環境変数指定(環境変数の設定見つつ指定してください)
+flyctl secrets set LOG_LEVEL=INFO
+flyctl secrets set IS_HEROKU=TRUE
+flyctl secrets set FIRST_REACTION_CHECK=TRUE
+flyctl secrets set REACJI_CHANNELER_PERMIT_WEBHOOK_ID=all
+flyctl secrets set DISCORD_TOKEN=__トークン__
+flyctl secrets set APPLICATION_ID=__アプリケーションID__
+
+# 起動
+flyctl deploy
+```
 
 ## ローカルでの動かし方
 
