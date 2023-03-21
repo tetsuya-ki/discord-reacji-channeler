@@ -99,7 +99,7 @@ first_time
 
 # temp
 temp/
-cogs/modules/files/reaction-channel.json
+cogs/modules/files/reacji-channel.json
 
 # vscode
 .vscode/launch.json

@@ -25,14 +25,14 @@ class ReactionChannelerCog(commands.Cog, name="リアク字チャンネラー"):
     # ReactionChannelerCogクラスのコンストラクタ。Botを受取り、インスタンス変数として保持。
     def __init__(self, bot):
         self.bot = bot
-        self.reaction_channel = None
+        self.reacji_channel = None
 
     # cogが準備できたら読み込みする
     @commands.Cog.listener()
     async def on_ready(self):
         LOG.info(f"load reacji-channeler's guilds{self.bot.guilds}")
-        self.reaction_channel = ReactionChannel(self.bot.guilds, self.bot)
-        await self.reaction_channel.get_discord_attachment_file()
+        self.reacji_channel = ReactionChannel(self.bot.guilds, self.bot)
+        await self.reacji_channel.get_discord_attachment_file()
 
     # リアク字チャンネラーコマンド群
     reacji_channeler = app_commands.Group(name="reacji-channeler", description='リアクチャンネラーを操作するコマンド（サブコマンド必須）')
@@ -67,7 +67,7 @@ class ReactionChannelerCog(commands.Cog, name="リアク字チャンネラー"):
         if webhook_url is None and channel is None:
             await interaction.response.send_message('チャンネルかWebhook URLを指定してください', ephemeral=True)
             return
-        msg = await self.reaction_channel.add(interaction, reaction, channel, webhook_url)
+        msg = await self.reacji_channel.add(interaction, reaction, channel, webhook_url)
         await interaction.response.send_message(msg, ephemeral=False)
 
     # リアク字チャンネラー確認
@@ -84,7 +84,7 @@ class ReactionChannelerCog(commands.Cog, name="リアク字チャンネラー"):
         ＊指定した絵文字でリアクションされた時、チャンネルに通知する機能のこと
         """
         hidden = True if reply_is_hidden == self.SHOW_ME else False
-        msg = await self.reaction_channel.list(interaction)
+        msg = await self.reacji_channel.list(interaction)
         await interaction.response.send_message(msg, ephemeral=hidden)
 
     # リアク字チャンネラー全削除
@@ -113,7 +113,7 @@ class ReactionChannelerCog(commands.Cog, name="リアク字チャンネラー"):
         except asyncio.TimeoutError:
             await confirm_msg.reply('→リアクションがなかったので、リアク字チャンネラーの全削除をキャンセルしました！')
         else:
-            msg = await self.reaction_channel.purge(interaction)
+            msg = await self.reacji_channel.purge(interaction)
             await confirm_msg.reply(msg)
 
     # リアク字チャンネラー削除（１種類）
@@ -141,7 +141,7 @@ class ReactionChannelerCog(commands.Cog, name="リアク字チャンネラー"):
             await interaction.response.send_message('チャンネルかWebhook URLを指定してください', ephemeral=True)
             return
 
-        msg = await self.reaction_channel.delete(interaction, reaction, channel, webhook_url)
+        msg = await self.reacji_channel.delete(interaction, reaction, channel, webhook_url)
         await interaction.response.send_message(msg, ephemeral=False)
 
     # リアクション追加時に実行されるイベントハンドラを定義
@@ -195,7 +195,7 @@ class ReactionChannelerCog(commands.Cog, name="リアク字チャンネラー"):
     async def reaction_to_send_channel(self, payload: discord.RawReactionActionEvent):
         # リアク字チャンネラーを読み込む
         guild = self.bot.get_guild(payload.guild_id)
-        await self.reaction_channel.set_rc(guild)
+        await self.reacji_channel.set_rc(guild)
 
         # リアクションから絵文字を取り出す（ギルド絵文字への変換も行う）
         emoji = payload.emoji.name
@@ -203,7 +203,7 @@ class ReactionChannelerCog(commands.Cog, name="リアク字チャンネラー"):
             emoji = f'<:{payload.emoji.name}:{payload.emoji.id}>'
 
         # 入力された絵文字でフィルターされたリストを生成する
-        filtered_list = [rc for rc in self.reaction_channel.guild_reaction_channels if emoji in rc]
+        filtered_list = [rc for rc in self.reacji_channel.guild_reacji_channels if emoji in rc]
 
         LOG.debug(f'*****emoji***** {emoji}')
 

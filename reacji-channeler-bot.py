@@ -65,7 +65,7 @@ async def main():
 # AssistantBotのインスタンス化および起動処理。
 if __name__ == '__main__':
     intents = discord.Intents.default()
-    intents.members = True # このBotでは必須(特権インテントの設定が必要)
+    intents.members = False
     intents.typing = False
     intents.presences = False
     intents.message_content = True # このBotでは必須(特権インテントの設定が必要)
