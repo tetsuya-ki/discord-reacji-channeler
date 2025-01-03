@@ -160,7 +160,7 @@ class ReactionChannelerCog(commands.Cog, name="リアク字チャンネラー"):
     async def on_raw_reaction_remove(self, payload: discord.RawReactionActionEvent):
         guild = self.bot.get_guild(payload.guild_id)
         member = guild.get_member(payload.user_id)
-        if member.bot:# BOTアカウントは無視する
+        if not member or member.bot:# BOTアカウントは無視する
             return
         await self.unpin_message(payload)
 

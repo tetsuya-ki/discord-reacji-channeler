@@ -50,7 +50,7 @@ class ReacjiChannelerBot(commands.Bot):
         if settings.ENABLE_SLASH_COMMAND_GUILD_ID is not None and len(settings.ENABLE_SLASH_COMMAND_GUILD_ID) > 0:
             LOG.info(settings.ENABLE_SLASH_COMMAND_GUILD_ID)
             for guild in settings.ENABLE_SLASH_COMMAND_GUILD_ID:
-                LOG.info(guild)
+                LOG.info(guild.id)
                 self.tree.copy_global_to(guild=guild)
                 await self.tree.sync(guild=guild)
         else:

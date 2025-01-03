@@ -1,15 +1,16 @@
-# fly.toml file generated for word-wolf on 2022-10-02T21:43:04+09:00
+# fly.toml file generated for discord-reacji-channeler on 2023-03-21T23:17:31+09:00
 
 app = "discord-reacji-channeler"
 kill_signal = "SIGINT"
 kill_timeout = 5
+primary_region = "nrt"
 processes = []
 
 [env]
 
 [experimental]
   allowed_public_ports = []
-  auto_rollback = true
+  auto_rollback = false
 
 [[services]]
   http_checks = []
@@ -21,18 +22,3 @@ processes = []
     hard_limit = 25
     soft_limit = 20
     type = "connections"
-
-  [[services.ports]]
-    force_https = true
-    handlers = ["http"]
-    port = 80
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
-
-  [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
-    restart_limit = 0
-    timeout = "2s"
