@@ -3,7 +3,7 @@ async-timeout>=4.0.0a3
 attrs>=17.3.0
 chardet==3.0.4
 discord.py==2.0.0
-idna==3.4
+idna==3.7
 mojimoji==0.0.12
 multidict==6.0.4
 python-dotenv==0.20.0
